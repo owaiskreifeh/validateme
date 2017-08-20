@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation| Validate Me</title>
+</head>
+<body>
+<form id="form" onsubmit="return validate()">
+    <div>
+        <label for="{{ID}}">{{LABEL}}</label>
+        <input type="{{TYPE}}" name="{{NAME}}" id="{{ID}}" value="{{VALUE}}" {{REQUIERD}}>
+        <div id="error-required"  style="display: none">
+            <strong>{{ERROR_REQUIRED}}</strong>
+        </div>
+        <div id="error-mismatch"  style="display: none">
+            <strong>{{ERROR_MISMATCH}}</strong>
+        </div>    </div>
+    <div>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </div>
+</form>
+
+
+<script src="js/validator.js"></script>
+</body>
+<!--Validate me | Made with ♥ by Codat-->
+</html>

@@ -2,25 +2,99 @@
  * Created by Owais on 8/19/2017.
  */
 
-var htmlTemplate = '<input type="*TYPE*" class="*CLASS*" name="*NAME*" id="*ID*" value="*VALUE*">';
+//HTML Elements
+var inputGenerated = $("#input-generated");
+var txtGeneratorName = $("#txt-generator-name");
+var txtGeneratorId = $("#txt-generator-id");
+var txtGeneratorLabel = $("#txt-generator-label");
+var txtGeneratorErrorRequired = $("#txt-generator-err-req");
+var txtGeneratorErrorMismatch = $("#txt-generator-err-mism");
 
-var jsTemplate = 'var pattern =  new RegExp("*PATTERN*");\n' +
-    'var input = document.getElementById("*ID*").value;\n' +
-    'if (!pattern.test(input)){\n' +
-    '\tdocument.getElementById("*ID*").appendChild(document.createTextNode("Error!"))\n' +
-    '}';
-function compile (js, pattern) {
-    var htmlCompiled = htmlTemplate.replace(/\*TYPE\*/ , $("#input-generated").attr("type"))
-        .replace(/\*CLASS\*/,$("#input-generated").attr("class"))
-        .replace(/\*VALUE\*/,$("#input-generated").val())
-        .replace(/\*NAME\*/,$("#txt-generator-name").val())
-        .replace(/\*ID\*/,$("#txt-generator-id").val());
 
-    var jsCompiled = "";
-    if(js === "js"){
-        jsCompiled = jsTemplate.replace(/\*ID\*/g,$("#txt-generator-id").val())
-            .replace(/\*PATTERN\*/,$("#lbl-pattern").text());
-    }
 
-    return [htmlCompiled, jsCompiled];
+
+
+/*
+* Loads Template file form app/template/ directory
+*
+* @function loadTemplate
+* @param fileName:String
+* @return String
+*
+* Anonymous function
+* **{
+* **@param none
+* **@return String
+* **}
+* */
+function loadTemplate(fileName) {
+    return (function () {
+        var txt = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "app/template/" + fileName,
+            'dataType': "text",
+            'success': function (data) {
+                txt = data;
+            }
+        });
+        return txt;
+    })();
+}
+
+
+/*
+* Compiles given HTML template
+*
+* @function compileHTML
+* @param template:String template file name with no extension
+* @return String compiled html string
+* */
+function compileHTML(template) {
+    var inCompiled = loadTemplate(template + ".html");
+    return inCompiled
+     .replace(/{{TYPE}}/, inputGenerated.attr("type"))
+     .replace(/{{VALUE}}/, inputGenerated.val())
+     .replace(/{{NAME}}/, txtGeneratorName.val())
+     .replace(/{{ID}}/g, txtGeneratorId.val())
+     .replace(/{{ERROR_REQUIRED}}/, txtGeneratorErrorRequired.val())
+     .replace(/{{ERROR_MISMATCH}}/, txtGeneratorErrorMismatch.val())
+     .replace(/{{LABEL}}/, txtGeneratorLabel.text())
+     .replace(/{{REQUIERD}}/,  $("#required").is(":checked") ? "required" : "");
+}
+
+/*
+ * Compiles given JS template
+ *
+ * @function compileJS
+ * @param template:String template file name with no extension
+ * @return String compiled js string
+ * */
+function compileJS(template) {
+    var inCompiled = loadTemplate(template + ".js");
+    return inCompiled
+        .replace(/{{REQUIERD}}/, $("#required").is(":checked"))
+        .replace(/{{PATTERN}}/, $("#final-pattern").val())
+        .replace(/{{NAME}}/, txtGeneratorName.val());
+}
+
+
+/*
+* Invokes compileHTML(String) and compileJS(String) with given options
+* @function compile
+* @param css:String css framework
+* @param js:String js library
+* @return void
+* */
+function compile(css, js) {
+
+    $("#txt-code-html").text(css === "bootstrap"
+        ?compileHTML("bootstrap_template")
+        :compileHTML("plan_template"));
+    $("#txt-code-js").text(js === "jquery"
+        ?compileJS("jquery_template")
+        :compileJS("plan_template"));
+
+
 }

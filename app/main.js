@@ -2,6 +2,20 @@
  * Created by Owais on 8/18/2017.
  */
 
+
+
+
+/*
+*Grep RegExp Patterns list from app/json/regex.json
+*
+* @variable
+*
+* Anonymous @function
+* **{
+* **@params none
+* **@return json object
+* **}
+* */
 var regexList = (function () {
     var json = null;
     $.ajax({
@@ -16,51 +30,97 @@ var regexList = (function () {
     return json;
 })();
 
-$("#pre-pattern").change(function () {
-    var pattern = regexList[$(this).find("option:selected").val()];
-    $("#txt-pattern").text(pattern);
-});
 
-$("#btn-generate").click(function () {
-    var className = $("#css-native").prop("checked")?"":"form-control";
-    $("#lbl-pattern").text($("#txt-pattern").text());
-    var inputType = $("#input-type").val();
-    $("#input-generated").attr("type", inputType)
-        .attr("class", className)
-        .prop('disabled', false);
-
-
-});
-
-$("#btn-pattern").click(function () {
-    $("#lbl-pattern").toggle();
-});
-
-
+/* Validate The input with given Pattern (var pattern)
+* @function validate
+* @param none
+* @return void
+* */
 function validate() {
-    var input = $("#input-generated").val();
-    var regex = new RegExp($("#lbl-pattern").text());
+    var regex = new RegExp($("#final-pattern").val());
 
-    if (regex.test(input)){
-        $("#lbl-test").removeClass()
+    if (regex.test($("#input-generated").val())){
+        $("#lbl-test")
+            .removeClass()
             .addClass("text-success")
             .text("PASS :D");
     }else {
-        $("#lbl-test").removeClass()
+        $("#lbl-test")
+            .removeClass()
             .addClass("text-danger")
             .text("Fail :(");
     }
 }
 
+
+/*
+ * onChange Event for #pre-pattern,
+ * Setting the RegExp Pattern to #txt-pattern TextArea
+ * @event change
+ * @id pre-pattern
+ * */
+$("#pre-pattern").change(function () {
+    var pattern = regexList[$(this).find("option:selected").val()];
+    $("#txt-pattern").text(pattern);
+});
+
+
+
+/*
+ * onClick Event for #btn-generate
+ * Modify (Test Space) input to given Css Style
+ * @event click
+ * @id btn-generate
+ * */
+$("#btn-generate").click(function () {
+    var className = $("#css-native").prop("checked")?"":"form-control";
+    $("#final-pattern").val($("#txt-pattern").text());
+    $("#input-generated")
+        .attr("type", $("#input-type").val())
+        .attr("class", className)
+        .prop('disabled', false);
+});
+
+
+/*
+ * onClick Event for #btn-pattern
+ * Toggles #final-pattern Input (Show/Hide)
+ * @event click
+ * @id btn-pattern
+ * */
+$("#btn-pattern").click(function () {
+    $("#final-pattern").toggle();
+});
+
+
+/*
+ * onClick Event for #btn-validate
+ * invokes @function validate()
+ * @event click
+ * @id btn-generate
+ * */
 $("#btn-validate").click(function () {validate()});
+
+
+/*
+ * onKeyup Event for #input-generated
+ * invokes @function validate()
+ * @event keyup
+ * @id input-generated
+ * */
 $("#input-generated").keyup(function () {validate()});
 
 
+/*
+ * onClick Event for #btn-code-generate
+ * invokes @function compile()
+ * @event click
+ * @id #btn-code-generate
+ * */
 $("#btn-code-generate").click(function () {
-    var code = compile(
-        $("#js-native").prop("checked")?"js":"jquery"
-        ,$("#lbl-pattern").text());
+    compile(
+        $("#css-native").prop("checked")?"native":"bootstrap"
+        ,$("#js-native").prop("checked")?"js":"jquery"
+        ,$("#final-pattern").val());
 
-    $("#txt-code-html").text(code[0]);
-    $("#txt-code-js").text(code[1]);
 });

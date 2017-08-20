@@ -87,14 +87,20 @@
                         <button id="btn-validate" class="btn btn-success">Validate</button>
                         <button id="btn-pattern" class="btn btn-light">Pattern</button>
                     </div>
-                    <div id="lbl-pattern" style="display: none" class="text-info">(.*)</div>
+                    <div>
+                        <input type="text" class="form-control"
+                               id="final-pattern" value="(.*)"
+                               style="display: none">
+                    </div>
                     <div id="gen-input" class="form-group">
-                        <input id="input-generated" type="text" disabled="disabled" class="form-control disabled">
+                        <input id="input-generated"
+                               type="text" disabled="disabled"
+                               class="form-control disabled">
                     </div>
                 </div>
                 <div id="res-pattern"></div>
                 <div id="res-text">
-                    <h2 class="text-info">Validation test :</h2>
+                    <h2 class="text-info">Validation Test :</h2>
                     <h1 id="lbl-test" class="text-muted">NULL</h1>
                 </div>
 
@@ -122,10 +128,23 @@
                             <input type="radio" name="js-framework" id="js-native" class="from-control" value="native-js">
                         </label>
                         <hr>
+                        <label for="txt-generator-label">Label</label>
+                        <input type="text" name="name" id="txt-generator-label" class="form-control" value="Label">
+                        <label for="txt-generator-err-req">Error Message </label>
+                        <input type="text" name="name" id="txt-generator-err-req" class="form-control" value="Oops! :(">
+
                         <label for="txt-generator-name">Name</label>
                         <input type="text" name="name" id="txt-generator-name" class="form-control" value="txt-name">
                         <label for="txt-generator-id">Id</label>
                         <input type="text" name="id" id="txt-generator-id" class="form-control" value="txt-id">
+
+                        <label for="required"></label>
+                        <input type="checkbox"  class="form-control" id="required" value="required" >
+
+                        <label for="txt-generator-err-mism">Required Message</label>
+                        <input type="text" id="txt-generator-err-mism" class="form-control" value="Cannot be empty">
+
+                        <hr>
                         <div class="btn-group">
                             <button id="btn-code-generate" class="btn btn-light">Generate</button>
                             <button class="btn btn-dark">Copy</button>
@@ -149,17 +168,20 @@
         </div><!--end of div.card Code Space-->
     </div><!--</div> end of div.row-->
 </div> <!--end of div.container-->
+
+
 <script src="js/jquery-3.2.1.min.js"></script>
+
+
+<script src="app/main.js"></script>
+<script src="app/codegenerator.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
         crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
         integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
         crossorigin="anonymous"></script>
-
-<script src="app/validate.js"></script>
-<script src="app/codegenerator.js"></script>
-<script src="app/main.js"></script>
 </body>
 </html>
 
