@@ -79,6 +79,15 @@ $("#btn-generate").click(function () {
         .attr("type", $("#input-type").val())
         .attr("class", className)
         .prop('disabled', false);
+
+    compile(
+        $("#css-native").prop("checked")?"native":"bootstrap"
+        ,$("#js-native").prop("checked")?"js":"jquery"
+        ,$("#final-pattern").val());
+
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
 });
 
 
@@ -111,16 +120,3 @@ $("#btn-validate").click(function () {validate()});
 $("#input-generated").keyup(function () {validate()});
 
 
-/*
- * onClick Event for #btn-code-generate
- * invokes @function compile()
- * @event click
- * @id #btn-code-generate
- * */
-$("#btn-code-generate").click(function () {
-    compile(
-        $("#css-native").prop("checked")?"native":"bootstrap"
-        ,$("#js-native").prop("checked")?"js":"jquery"
-        ,$("#final-pattern").val());
-
-});

@@ -4,17 +4,17 @@
  * */
 function validate() {
     var x = document.forms["form"]["{{NAME}}"].value;
-    x = x.trim();
+    var regex = new RegExp(/{{PATTERN}}/);
     var isRequierd = {{REQUIERD}} ;
 
+    x = x.trim();
+
     if (x === "" && isRequierd){
-        document.getElementById("error-required").style.display = "";
+        document.getElementById("error-required").style.display = "block";
+        return false;
+    }else if (!regex.test(x)){
+        document.getElementById("error-mismatch").style.display = "block";
         return false;
     }
 
-    var regex = new RegExp(/{{PATTERN}}/);
-    if (!regex.test(x)){
-        document.getElementById("error-mismatch").style.display = "";
-        return false;
-    }
 }

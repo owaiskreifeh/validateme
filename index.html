@@ -3,178 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <title>Validate Me!</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+
+
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/highlight_atom_dark.css">
 
 </head>
 <body>
 
 <div class="container">
+    <h1 class="header">Validate Me</h1>
     <div class="row">
+        <div class="col">
+             <h2 class="text-info">
+                Input Type
+                <small class="text-muted">HTML5 input types</small>
+            </h2>
+            <select name="input-type" id="input-type" class="form-control">
+                <option value="" class="dropdown-item">Select type</option>
+                <option value="text" class="dropdown-item">Text input</option>
+                <option value="password" class="dropdown-item">Password input</option>
+                <option value="number" class="dropdown-item">Number</option>
+                <option value="range" class="dropdown-item">Range</option>
+                <option value="date" class="dropdown-item">Date</option>
+                <option value="datetime" class="dropdown-item">Date - Time</option>
+                <option value="time" class="dropdown-item">Time</option>
+                <option value="week" class="dropdown-item">Week</option>
+                <option value="month" class="dropdown-item">Month</option>
+                <option value="email" class="dropdown-item">Email</option>
+                <option value="tel" class="dropdown-item">Telephone</option>
+                <option value="url" class="dropdown-item">URL</option>
+                <option value="color" class="dropdown-item">Color</option>
+            </select>
 
-        <h1 class="header">Validate me!</h1>
 
+            <h2 class="text-info">
+                Validation Pattern
+                <small class="text-muted">JavaScript RegEX</small>
+            </h2>
+            <select name="pre-pattern" id="pre-pattern" class="form-control">
+                <option value="" class="dropdown-item">Ready to Use Patterns</option>
+                <option value="email" class="dropdown-item">Email</option>
+                <option value="phone" class="dropdown-item">Phone (JO)</option>
+            </select>
 
-        <div class="card">
-            <div class="card-header">
-                Input Element Builder
+            <textarea type="text" id="txt-pattern" class="form-control" rows="5"></textarea>
+            <hr>
+            <h2 class="text-info">CSS Framework</h2>
+            <label class="custom-control custom-radio">
+                <input id="css-bootstrap" name="css-framework" type="radio" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Bootstrap</span>
+            </label>
+            <label class="custom-control custom-radio">
+                <input id="css-native" name="css-framework" type="radio" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Native</span>
+            </label>
+            <hr>
+            <h2 class="text-info">JS Library</h2>
+            <label class="custom-control custom-radio">
+                <input id="jquery" name="js-framework" type="radio" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">JQuery</span>
+            </label>
+            <label class="custom-control custom-radio">
+                <input id="js-native" name="js-framework" type="radio" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Native</span>
+            </label>
+            <hr>
+
+            <div class="btn-group">
+                <button class="btn btn-success" id="btn-generate">Test Input</button>
+                <button id="btn-more-options" class="btn btn-dark w-100">Show more options</button>
             </div>
-            <div class="card-block">
-                <h2 class="text-info">
-                    Input Type
-                    <small class="text-muted">HTML5 input types</small>
-                </h2>
-                <select name="input-type" id="input-type" class="form-control">
-                    <option value="" class="dropdown-item">Select type</option>
-                    <option value="text" class="dropdown-item">Text input</option>
-                    <option value="password" class="dropdown-item">Password input</option>
-                    <option value="number" class="dropdown-item">Number</option>
-                    <option value="range" class="dropdown-item">Range</option>
-                    <option value="date" class="dropdown-item">Date</option>
-                    <option value="datetime" class="dropdown-item">Date - Time</option>
-                    <option value="time" class="dropdown-item">Time</option>
-                    <option value="week" class="dropdown-item">Week</option>
-                    <option value="month" class="dropdown-item">Month</option>
-                    <option value="email" class="dropdown-item">Email</option>
-                    <option value="tel" class="dropdown-item">Telephone</option>
-                    <option value="url" class="dropdown-item">URL</option>
-                    <option value="color" class="dropdown-item">Color</option>
-                </select>
 
-                <h2 class="text-info">
-                    Validation Pattern
-                    <small class="text-muted">JavaScript RegEX</small>
-                </h2>
-                <select name="pre-pattern" id="pre-pattern" class="form-control">
-                    <option value="" class="dropdown-item">Ready to Use Patterns</option>
-                    <option value="email" class="dropdown-item">Email</option>
-                    <option value="phone" class="dropdown-item">Phone (JO)</option>
-                    <option value="in-range" class="dropdown-item">in Range</option>
-                    <option value="max" class="dropdown-item">Max Of</option>
-                    <option value="min" class="dropdown-item">Min Of</option>
-                </select>
+        </div>
 
-                <textarea type="text" id="txt-pattern" class="form-control" rows="10"></textarea>
+        <div class="col">
 
-                <h2 class="text-info">CSS Framework</h2>
-                <label class="custom-control custom-radio">
-                    <input id="css-bootstrap" name="css-framework" type="radio" class="custom-control-input">
+
+            <div id="more-options" class="form-group" style="display: none">
+                <h2 class="text-info">More Options</h2>
+
+                <label for="txt-generator-label">Label</label>
+                <input type="text" name="name" id="txt-generator-label" class="form-control" value="Label">
+
+                <label for="txt-generator-err-mism">Error Message </label>
+                <input type="text" name="name" id="txt-generator-err-mism" class="form-control" value="Oops! :(">
+
+                <label for="txt-generator-name">Name</label>
+                <input type="text" name="name" id="txt-generator-name" class="form-control" value="txt-name">
+
+                <label for="txt-generator-id">Id</label>
+                <input type="text" name="id" id="txt-generator-id" class="form-control" value="txt-id">
+                <div></div>
+                <label class="custom-control custom-checkbox">
+                    <input id="required" type="checkbox" class="custom-control-input">
                     <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Bootstrap</span>
+                    <span class="custom-control-description">Required</span>
                 </label>
-                <label class="custom-control custom-radio">
-                    <input id="css-native" name="css-framework" type="radio" class="custom-control-input">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Native</span>
-                </label>
-                <hr>
-
-                <button class="btn btn-outline-success" id="btn-generate">Generate</button>
+                <div></div>
+                <label for="txt-generator-err-req" class="line">Required Message</label>
+                <input type="text" id="txt-generator-err-req" class="form-control" value="Cannot be empty">
             </div>
-        </div> <!--end of div.card Input Element Builder-->
 
+            <h1 class="section">Test</h1>
 
-        <div class="card col-md-5 col-sm-8">
-            <div class="card-header">Test Space</div>
-            <div class="card-block">
-                <h2 class="text-info">
-                    Generated Item</h2>
-                <div id="res-input">
-                    <div class="btn-group">
-                        <button id="btn-validate" class="btn btn-success">Validate</button>
-                        <button id="btn-pattern" class="btn btn-light">Pattern</button>
-                    </div>
-                    <div>
-                        <input type="text" class="form-control"
-                               id="final-pattern" value="(.*)"
-                               style="display: none">
-                    </div>
-                    <div id="gen-input" class="form-group">
-                        <input id="input-generated"
-                               type="text" disabled="disabled"
-                               class="form-control disabled">
-                    </div>
+            <h2 class="text-info">
+                Generated Item</h2>
+            <div id="res-input">
+                <div class="btn-group">
+                    <button id="btn-validate" class="btn btn-success">Validate</button>
+                    <button id="btn-pattern" class="btn btn-light">Pattern</button>
                 </div>
-                <div id="res-pattern"></div>
-                <div id="res-text">
-                    <h2 class="text-info">Validation Test :</h2>
-                    <h1 id="lbl-test" class="text-muted">NULL</h1>
+                <div>
+                    <label for="final-pattern" class="text-muted">Pattern</label>
+
+                    <input type="text" class="form-control"
+                           id="final-pattern" value="(.*)"
+                           style="display: none">
                 </div>
+                <div id="gen-input" class="form-group">
 
-
-            </div>
-
-        </div><!--end of div.card Test Space-->
-
-
-        <div class="card">
-            <div class="card-block">
-                <h2 class="text-info">Generator
-                    <small class="text-muted">HTML and JS Code</small>
-                </h2>
-
-                <div class="card">
-                    <div class="card-block">
-                        JS Library :
-                        <label>
-                            JQuery
-                            <input type="radio" name="js-framework" id="jquery" class="from-control" value="jquery">
-                        </label>
-                        <label>
-                            Native
-                            <input type="radio" name="js-framework" id="js-native" class="from-control" value="native-js">
-                        </label>
-                        <hr>
-                        <label for="txt-generator-label">Label</label>
-                        <input type="text" name="name" id="txt-generator-label" class="form-control" value="Label">
-                        <label for="txt-generator-err-req">Error Message </label>
-                        <input type="text" name="name" id="txt-generator-err-req" class="form-control" value="Oops! :(">
-
-                        <label for="txt-generator-name">Name</label>
-                        <input type="text" name="name" id="txt-generator-name" class="form-control" value="txt-name">
-                        <label for="txt-generator-id">Id</label>
-                        <input type="text" name="id" id="txt-generator-id" class="form-control" value="txt-id">
-
-                        <label for="required"></label>
-                        <input type="checkbox"  class="form-control" id="required" value="required" >
-
-                        <label for="txt-generator-err-mism">Required Message</label>
-                        <input type="text" id="txt-generator-err-mism" class="form-control" value="Cannot be empty">
-
-                        <hr>
-                        <div class="btn-group">
-                            <button id="btn-code-generate" class="btn btn-light">Generate</button>
-                            <button class="btn btn-dark">Copy</button>
-                        </div>
-                    </div>
+                    <label for="input-generated" class="text-muted">Test Input</label>
+                    <input id="input-generated"
+                           type="text" disabled="disabled"
+                           class="form-control disabled">
                 </div>
-
             </div>
-        </div> <!--end of div.card Generator-->
-
-        <div class="card">
-            <div class="card-block">
-                <h2 class="text-info">Code
-                    <small class="text-muted">HTML and JS Code</small>
-                </h2>
-                 <small class="text-muted">HTML</small>
-                <textarea name="" id="txt-code-html" cols="50" rows="10" class="form-control"></textarea>
-                <small class="text-muted">JS</small>
-                <textarea name="" id="txt-code-js" cols="50" rows="10" class="form-control"></textarea>
+            <div id="res-text">
+                <h2 class="text-info">Validation Test :</h2>
+                <h1 id="lbl-test" class="text-muted">NULL</h1>
             </div>
-        </div><!--end of div.card Code Space-->
-    </div><!--</div> end of div.row-->
-</div> <!--end of div.container-->
+
+
+        </div>
+    </div>
+
+
+    <div class="row" style="display: none" id="code-area">
+        <div class="col col-md-6">
+            <small class="text-muted">HTML</small>
+            <button id="copy-html" class="btn btn-sm btn-dark">Copy</button>
+            <pre><code id="txt-code-html" class="html">
+
+       </code></pre>
+        </div>
+        <div class="col col-md-6">
+            <small class="text-muted">JS</small>
+            <button id="copy-js" class="btn btn-sm btn-dark">Copy</button>
+
+            <pre><code id="txt-code-js" class="js">
+
+       </code></pre>
+        </div>
+    </div>
+
+</div>
 
 
 <script src="js/jquery-3.2.1.min.js"></script>
 
+<script src="js/clipboard.js"></script>
+<script src="js/highlight.pack.js"></script>
 
 <script src="app/main.js"></script>
 <script src="app/codegenerator.js"></script>
+<script src="js/index.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
@@ -182,6 +183,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
         integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
         crossorigin="anonymous"></script>
+
 </body>
 </html>
+
 

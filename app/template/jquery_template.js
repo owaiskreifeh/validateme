@@ -3,7 +3,7 @@
  * Validate Me
  * */
 function validate() {
-    var value = $("{{ID}}")
+    var value = $("#{{ID}}")
         .val()
         .trim();
 
